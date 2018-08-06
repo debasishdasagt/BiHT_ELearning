@@ -55,41 +55,24 @@ and open the template in the editor.
 <span></span>
 </a>
                         <ul>
+<?php
+session_start();
+if($_SESSION['rolecode']==1)
+{
+?>
+<li><a>Administration</a>
+<ul>
+  <li><a href="http://www.google.com">Sub Item 1.1</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.2</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.3</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.4</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.2</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.3</a></li>
+  <li><a href="http://www.google.com">Sub Item 1.4</a></li>
+ </ul></li>
+<?php } ?>
 
-<li><a href="http://www.google.com">Item 1</a></li>
-<li><a href="http://www.google.com">Folder 0</a>
-  <ul>
-  <li><a href="http://www.google.com">Sub Item 1.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.2</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.3</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.4</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.2</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.3</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.4</a></li>
-  </ul>
-</li>
-<li><a href="http://www.google.com">Folder 1</a>
-  <ul class="multicolumn">
-  <li><a href="http://www.google.com">Sub Item 1.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.2</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.3</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.4</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.5</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.6</a></li>
-  <li><a href="http://www.google.com">Sub Item 1.7</a></li>
-  </ul>
-</li>
-<li><a href="http://www.google.com">Item 3</a></li>
-<li><a href="http://www.google.com">Folder 2</a>
-  <ul>
-  <li><a href="http://www.google.com">Sub Item 2.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 2.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 2.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 2.1</a></li>
-  <li><a href="http://www.google.com">Sub Item 2.1</a></li>
-  </ul>
-</li>
-<li><a href="http://www.google.com/style/">Item 4</a></li>
+<li><a href="pages/logout.php">Log Out</a></li>
 
                         </ul></div>
                     </td>

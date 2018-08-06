@@ -17,7 +17,7 @@ and open the template in the editor.
     top: 50%;
     left: 50%;
     position: absolute;
-    background-color: #bebebe;
+    background-color: #d1d1d1;
     border: 1px solid #cccccc;
     border-radius: 5px;
    
@@ -238,7 +238,7 @@ and open the template in the editor.
     border-radius: 3px;
     box-shadow: 0px px 1px 1px #000000;
     padding: 3px;
-    background-color: #1fa816;
+    background-color: #0eb6f4;
     cursor: pointer;
     height: 30px;
     font-size: 20px;

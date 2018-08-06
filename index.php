@@ -13,12 +13,12 @@ and open the template in the editor.
         <script type="text/javascript">
             function checklogin()
             {
-                $.post("handlers/canlogin.php",{'reg':document.getElementById('reg').value,'pass':document.getElementById('pass').value},
+                $.post("handlers/lclogin.php",{'reg':document.getElementById('reg').value,'pass':document.getElementById('pass').value},
                 function(data,status)
                 {
                    if(data=='1')
                    {
-                       document.location="candidate_detail.php";
+                       document.location="frame.php";
                    }
                    else if(data=='0')
                    {
@@ -67,9 +67,8 @@ and open the template in the editor.
                 <tr>
                     <td align='left'>
                         
-                        <a href="candidate_reg.php" target="_self">New Candidate Registration</a>
-                        <br>
-                        Reset Password
+                       
+                        <a href="pages/resetpass.php" target="_self">Reset Password</a>
                     </td>
                     
                 </tr>
