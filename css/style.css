@@ -1,0 +1,250 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 3, 2018, 2:39:16 PM
+    Author     : Debasish
+*/
+
+
+
+
+#maincontainer
+{
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    background-color: #bebebe;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+   
+    min-width: 800px;
+}
+
+
+.big_btn1,.big_btn2
+{
+    width: 210px;
+    height: 50px;
+    background-color: #555af1;
+    border-radius: 5px;
+    color: white;
+    vertical-align: middle;
+    font-family: 'calibri';
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.big_btn2
+{
+    width: 240px;
+    background-color: #167713;
+}
+
+.big_btn1:hover
+{
+    background-color: #909ee9;
+}
+
+.big_btn2:hover
+{
+    background-color: #4aa21e;
+}
+
+
+.header_txt{
+    color: white;
+    font-family: "calibri";
+    font-size: 30px;
+    padding-left: 30px;
+    line-height:0.7;
+
+}
+
+#head_r
+{
+    background-color: #484848;
+    height:35px;
+    width: 100%; 
+    box-shadow: 0px 0px 2px 1px black; 
+}
+
+.logo
+{
+
+}
+
+
+#progress
+{
+    align-content: center;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    
+    position: relative;
+}
+
+.cur_status,.done_status,.pending_status
+{
+    background-image: url("../images/s2.png");
+    background-repeat: no-repeat;
+    width: 150px;
+    border-radius: 3px;
+    font-family: 'calibri';
+    height: 26px;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 12px;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+.done_status
+{
+    background-image: url("../images/s1.png");
+}
+
+.pending_status
+{
+    background-image: url("../images/s3.png");
+}
+
+
+#form_bg
+{
+    background-color: #79c4d1;
+    width: 90%;
+    position: relative;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    font-family: 'calibri';
+    color: white;
+}
+
+#btn_bar
+{
+    border-top: 1px solid #cccccc;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    padding: 10px;
+   margin-bottom: 5px;
+}
+
+.txtbx
+{
+    border: 1px solid #919191;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 24px;
+    padding-left: 3px;
+    width: 250px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btn
+{
+    align-content: center;
+    text-align: center;
+    width: 100px;
+    color: white;
+    font-family: "calibri";
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 1px #000000;
+    padding: 3px;
+    background-color: #0d82e3;
+    cursor: pointer;
+}
+
+.ajax_s
+{
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.ajax_msg
+{
+    font-size: 12px;
+    border-radius: 3px;
+    color: white;
+   position: absolute;
+   padding: 3px;
+}
+
+.regpass
+{
+    font-family: "calibri";
+    color: #585858;
+    font-size: 16px;
+    padding-left:80px;
+    padding-right: 30px;
+    text-align: justify;
+}
+
+.login_box
+{
+    width: 300px;
+    background-color:#484848;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 5px  black;
+    text-align: center;
+    color: white;
+    font-family: "calibri";
+    align-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 14px;
+}
+.login_box a
+{
+    color: white;
+}
+
+
+.login_txtbx
+{
+    background-color: white;
+    height: 30px;
+    max-width: 260px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 30px;
+    border: 0px; 
+    font-size: 14px;
+    background-repeat: no-repeat;
+    background-position-x: 5px;
+    background-position-y: 5px;
+    margin-top: 3px;
+}
+
+.login_btn
+{
+    align-content: center;
+    text-align: center;
+    width: 98%;
+    color: white;
+    font-family: "calibri";
+    border-radius: 3px;
+    box-shadow: 0px px 1px 1px #000000;
+    padding: 3px;
+    background-color: #1fa816;
+    cursor: pointer;
+    height: 30px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.login_btn:hover{
+    background-color: #28d91d;
+}

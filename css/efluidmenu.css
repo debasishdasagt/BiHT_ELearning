@@ -1,0 +1,496 @@
+.efluidmenu {
+    font: bold 12px 'Calibri';
+    /*background of menu bar (default state)*/
+    width: 100%;
+    position: relative;
+    padding-left: 50px;
+}
+
+
+.efluidmenu, .efluidmenu * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.efluidmenu > ul { /* style of top UL menu */
+    z-index: 100;
+    padding: 0;
+    list-style: none;
+    margin: 0 auto;
+		width: 100%;
+    position: relative;
+    max-width: 1024px;  /* width of top UL menu */
+}
+
+
+.efluidmenu > ul li { /*Top level list items*/
+    position: relative;
+    display: inline-block;
+    margin-right: 26px; /* Spacing between level list items */
+    z-index: 100;
+    -webkit-perspective: 500px;
+    -moz-perspective: 500px;
+    perspective: 500px;
+    -webkit-perspective-origin: 50%;
+    -moz-perspective-origin: 50%;
+    perspective-origin: 50%;
+}
+
+.efluidmenu > ul li a { /*Top level menu link items style */
+    color: white;
+    display: inline-block;
+    padding: 5px 7px;
+    text-decoration: none;
+    font: bold 0.9em 'Calibri';
+    text-transform: uppercase;
+    line-height: 20px;
+}
+
+
+.efluidmenu > ul li#sitelogo { 
+    margin-right: 10px;
+    width: 55px;
+    position: relative;
+    vertical-align: top;
+}
+
+.efluidmenu > ul li#sitelogo a{
+    padding: 0;
+    position: absolute;
+    top: 0;
+    line-height: normal;
+    display: block;
+}
+
+.efluidmenu > ul li#sitelogo a:hover{
+    background: none;
+}
+
+.efluidmenu > ul li#sitelogo a img{
+    width: 55px;
+    border-width: 0;
+}
+
+ul li#search { /* style for LI that houses search form */ 
+    float: right;
+    margin-right: 5px;
+    padding-top: 7px;
+}
+
+ul li#search form {
+    position: relative;
+    width: 210px;
+    display: block;
+}
+
+ul li#search input[type="text"] {
+    height: 28px;
+    width: 100%;
+    text-indent: 3px;
+    padding-right: 27px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+ul li #query_submit { /* submit button image position */ 
+    position: absolute;
+    right: 4px;
+    top: 22%;
+}
+
+
+.efluidmenu > ul li a:link, .efluidmenu ul li a:visited {
+    color: white;
+}
+
+.efluidmenu > ul li.selected a{ /*CSS class that's dynamically added to the currently active menu items' LI element*/
+    background: #24a9a7;
+    color: white;
+}
+
+.efluidmenu > ul li a:hover {
+    background: #a3a3a3;  /*background of menu items during onmouseover (hover state)*/
+    color: white;
+}
+
+/* ## Sub Menus CSS ## */
+
+.efluidmenu ul li > ul {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    width: 200px; 
+    display: block;
+    background: #24a9a7;
+    display: none;  /*collapse all sub menus to begin with*/
+    visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+
+}
+
+/*Sub level menu list items (alters style from Top level List Items)*/
+
+.efluidmenu ul li > ul li {
+    display: block;
+    margin-right: 0;
+}
+
+/* Sub level menu links style */
+
+.efluidmenu ul li > ul li a {
+    font-family: Arial;
+    display: block;
+    padding: 8px;
+    margin-right: 0;
+    border-top-width: 0;
+    border-bottom: 1px solid #289997;
+}
+
+.efluidmenu ul li ul > li a:hover {
+    background: #2cc1bf;
+}
+
+/* # Multiple columns UL sub menu # */
+
+
+ul.multicolumn {
+    width: 460px !important;
+    left: 300px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+ul.multicolumn li {
+    float: left;
+    display: inline;
+}
+
+ul.multicolumn li {
+    width: 50%;
+		/* width: 33%; */ /* for 3 columns */
+		/* width: 25%; */ /* for 4 columns */
+}
+
+/* # Rich HTML independent multiple columns DIV drop down # */
+
+div.richmulticolumn{ /* style for richmulticolumn drop down before it's added to fluid menu DOM */
+	display: none;
+}
+
+.efluidmenu ul li > div.richmulticolumn {
+    position: absolute;
+    left: 0;
+    display: none;
+    visibility: hidden;
+    border: 1px solid #289997;
+    padding: 10px;
+    width: 450px;
+    color: white;
+    background: #24a9a7;
+}
+
+.efluidmenu ul li > div.richmulticolumn .column {
+    width: 140px;
+    float: left;
+}
+
+.efluidmenu ul li > div.richmulticolumn .column b {
+    margin-bottom: 1em;
+    display: block;
+    font-size: 14px;
+}
+
+.efluidmenu ul li > div.richmulticolumn .column ul {
+    margin: 0;
+    margin-right: 15px;
+    padding: 0;
+    list-style-type: none;
+
+}
+
+.efluidmenu ul li > div.richmulticolumn li {
+    padding: 0;
+    margin: 0;
+    display: block;
+    border-bottom: 1px solid #289997;
+}
+
+.efluidmenu ul li > div.richmulticolumn li a {
+    padding: 4px;
+    display: block;
+    color: white;
+    font-size: 14px;
+    text-transform: none;
+}
+
+.efluidmenu ul li > div.richmulticolumn li a:hover {
+    background: #2cc1bf;
+}
+
+
+/* ######### CSS Animations  ######### */
+
+@-moz-keyframes fade-in-rise-down {
+    
+    0% {
+        pointer-events: auto;
+        opacity: 0;
+        -moz-transform: translateY(-10px);
+    }
+    
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0);
+    }
+
+}
+
+@-moz-keyframes fade-out-nudge-up {
+    
+    0% {
+        pointer-events: none;
+    }
+    100% {
+        opacity: 0;
+        -moz-transform: translateY(-10px);
+    }
+}
+
+@-webkit-keyframes fade-in-rise-down {
+    
+    0% {
+        pointer-events: auto;
+        opacity: 0;
+        -webkit-transform: translateY(-10px);
+    }
+    
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+
+}
+
+@-webkit-keyframes fade-out-nudge-up {
+    
+    0% {
+        pointer-events: none;
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-10px);
+    }
+}
+
+
+@keyframes fade-in-rise-down {
+    
+    0% {
+        pointer-events: auto;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fade-out-nudge-up {
+    
+    0% {
+        pointer-events: none;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.fade-in-rise-down-animation {
+    -webkit-animation: fade-in-rise-down ease forwards 0.4s;
+    -moz-animation: fade-in-rise-down ease forwards 0.4s;
+    -ms-animation: fade-in-rise-down ease forwards 0.4s;
+    -o-animation: fade-in-rise-down ease forwards 0.4s;
+    animation: fade-in-rise-down ease forwards .4s;
+}
+
+.fade-out-nudge-up-animation {
+    -webkit-animation: fade-out-nudge-up ease forwards 0.4s;
+    -moz-animation: fade-out-nudge-up ease forwards 0.4s;
+    -ms-animation: fade-out-nudge-up ease forwards 0.4s;
+    -o-animation: fade-out-nudge-up ease forwards 0.4s;
+    animation: fade-out-nudge-up ease forwards .4s;
+}
+
+
+/* ######### CSS class applied to down arrow images  ######### */
+
+
+.downarrow {
+    position: relative;
+    margin-left: 6px;
+		border-width: 0;
+}
+
+/* ######### CSS class applied to main menu UL in mobile menu mode when menu is open ######### */
+
+.efluidmenu .openmobileclass {
+    display: block;
+}
+
+
+/* ############# Animated Drawer icon (mobile menu toggler) CSS ############# */
+
+.efluid-animateddrawer {
+    font-size: 10px;
+    /* Base font size. Adjust this value to modify size of drawer icon */
+    width: 3em;
+    height: 2.8em;
+    outline: none;
+    position: relative;
+    display: none;
+    left: 12px;
+    z-index: 1000;
+}
+
+.efluid-animateddrawer:before, .efluid-animateddrawer:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0.6em;
+    /* height of top and bottom drawer line */
+    background: white;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in;
+    /* set transition type and time */
+    transition: all 0.3s ease-in;
+}
+
+.efluid-animateddrawer:after {
+    top: auto;
+    bottom: 0;
+}
+
+.efluid-animateddrawer span {
+    width: 100%;
+    height: 0.6em;
+    /* height of middle drawer line */
+    background: white;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.3em;
+    /* set this to - half of middle drawer line height */
+    border-radius: 2px;
+    -ms-transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: all 0.3s ease-in 0.3s;
+    /* set transition type and time */
+    transition: all 0.3s ease-in 0.3s;
+}
+
+.efluid-animateddrawer span::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0.6em;
+    /* height of middle drawer line */
+    background: white;
+    border-radius: 2px;
+    position: absolute;
+    -ms-transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: all 0.3s ease-in 0.3s;
+    /* set transition type and time */
+    transition: all 0.3s ease-in 0.3s;
+}
+
+
+/* ####### responsive layout CSS ####### */
+
+@media (max-width: 1100px) { /* FIRST breaking point */
+
+    .efluidmenu > ul li#sitelogo{
+        margin-left: 10px;
+    }
+    .efluidmenu > ul li#sitelogo a img{
+        width: 40px; /* reduce size of site logo */
+    }
+}
+
+
+@media screen and (max-width: 930px) { /* SECOND breaking point */
+    /* mobile layout break point */
+    
+    .efluidmenu ul li#search {
+        display: none; /* Hide search LI */
+    }
+}
+ 
+@media screen and (max-width: 450px) { /* FINAL, mobile menu breaking point */
+    
+    .efluidmenu {
+        padding: 8px 0;
+        margin-bottom: 10px;
+    }
+    
+    .efluid-animateddrawer {
+        display: block; /* show mobile menu toggler */
+        clear: both;
+    }
+    
+    .efluidmenu ul {
+        margin-top: 16px; /* Position main menu UL below menu toggler above */
+        display: none; /* Hide menu by default */
+    }
+    
+    .efluidmenu ul li#sitelogo {
+       display: none;
+    }
+    
+    .efluidmenu ul li {
+        display: block;
+        margin-right: 0;
+    }
+    
+    .efluidmenu ul li a {
+        display: block;
+        width: 100%;
+        padding-left: 10px;
+    
+    }
+    
+    .efluidmenu ul li a:hover {
+        border-radius: 0;
+    }
+    
+    .efluidmenu ul li#search {
+        display: block;
+        float: none;
+        padding-left: 3px;
+    }
+    
+    .efluidmenu ul li#search form {
+        width: 100%;
+    }
+    
+    .efluidmenu ul li ul {
+        display: none !important; /* force hiding of all drop down menus */
+    }
+    
+    .efluidmenu .downarrow {
+        display: none;
+    }
+
+}
