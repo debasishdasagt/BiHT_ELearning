@@ -43,7 +43,7 @@ and open the template in the editor.
         <div class='login_box'>
             <img src="images/biht_elearning_logo.png">
             <br><br>
-            
+            <form action="checklogin()" id="loginform">
             <table border='0' cellspacing='0' cellpadding='5' width='300'>
                 <tr>
                     <td align='left'>
@@ -73,6 +73,7 @@ and open the template in the editor.
                     
                 </tr>
             </table>
+            </form>
         </div>
         
     </center>
