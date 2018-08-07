@@ -181,13 +181,12 @@ and open the template in the editor.
    padding: 3px;
 }
 
-.regpass
+.bodytext
 {
     font-family: "calibri";
     color: #585858;
     font-size: 16px;
-    padding-left:80px;
-    padding-right: 30px;
+    
     text-align: justify;
 }
 

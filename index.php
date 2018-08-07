@@ -9,7 +9,11 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>BiHT e-Learning</title>
         <link rel='stylesheet' href='css/style.css'>
+        <link rel="stylesheet" type="text/css" href="CSS/featherlight.css">
+        
+        
         <script type="text/javascript" src="js/jquery-latest.js"></script>
+         <script type="text/javascript" src="JS/featherlight.js" charset="utf-8"></script>
         <script type="text/javascript">
             function checklogin()
             {
@@ -68,7 +72,7 @@ and open the template in the editor.
                     <td align='left'>
                         
                        
-                        <a href="pages/resetpass.php" target="_self">Reset Password</a>
+                        <a href='pages/resetpass.php' data-featherlight='iframe'>Reset Password</a>
                     </td>
                     
                 </tr>
