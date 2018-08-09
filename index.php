@@ -9,11 +9,11 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>BiHT e-Learning</title>
         <link rel='stylesheet' href='css/style.css'>
-        <link rel="stylesheet" type="text/css" href="CSS/featherlight.css">
+        <link rel="stylesheet" type="text/css" href="css/featherlight.css">
         
         
         <script type="text/javascript" src="js/jquery-latest.js"></script>
-         <script type="text/javascript" src="JS/featherlight.js" charset="utf-8"></script>
+         <script type="text/javascript" src="js/featherlight.js" charset="utf-8"></script>
         <script type="text/javascript">
             function checklogin()
             {

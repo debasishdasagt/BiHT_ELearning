@@ -16,10 +16,12 @@ if(isset($_GET['userid']))
     $setNEWpswd= mysql_query("insert into d_user_password(staff_id,user_id,passwd,record_status,created_on) values('".$qr['staff_id']."','".$UQres['user_id']."',md5('".$newpass."'),'A',now())",$conn);
     if($disablePSWD && $setNEWpswd)
     {
-        $mailbdy="<div style='font-family:calibri;font-size:14px'>Hello ".$qr['staff_name'].",<br> As per your request, we have resetted your password. Below are your new password and login id.<br><br>Login ID: <b>".$UQres['user_id']."</b><br>New Password: <b>".passwd()."</b><br><br>Please use the same new password lo login and it is recommanded to set a strong password.</div>";
+        $mailbdy="<div style='font-family:calibri;font-size:14px'>Hello ".$qr['staff_name'].",<br> As per your request, we have resetted your password. Below are your new password and login id.<br><br>Login ID: <b>".$UQres['user_id']."</b><br>New Password: <b>".$newpass."</b><br><br>Please use the same new password lo login and it is recommanded to set a strong password.</div>";
        header("location:../mailer.php?mailadd=".$qr['staff_email']."&mailnam=".$qr['staff_name']."&mailsub=BiHT e-Learning New Password&mailbdy=".$mailbdy);
     }
-    }}
+    }
+    echo "0";
+    }
 function passwd()
 {
     $chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRDTUVWXYZ1234567890";
