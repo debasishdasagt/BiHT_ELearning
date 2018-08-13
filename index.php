@@ -22,7 +22,7 @@ and open the template in the editor.
                 {
                    if(data=='1')
                    {
-                       document.location="frame.php";
+                       document.location="home.php";
                    }
                    else if(data=='0')
                    {

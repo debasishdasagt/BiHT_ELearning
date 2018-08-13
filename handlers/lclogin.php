@@ -12,7 +12,7 @@ if(isset($_POST['reg'])&&isset($_POST['pass']))
         $ress=mysql_fetch_array($rr);
         session_start();
         $_SESSION["rolecode"] = $ress['rc'];
-        $_SESSION["userid"] = $ress['rc'];
+        $_SESSION["userid"] = $_POST['reg'];
         echo "1";
     }
  else 

@@ -144,11 +144,11 @@ and open the template in the editor.
     border: 1px solid #919191;
     border-radius: 3px;
     font-size: 14px;
-    height: 24px;
+    height: 20px;
     padding-left: 3px;
-    width: 250px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    width: 200px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
 
 .btn
@@ -158,11 +158,15 @@ and open the template in the editor.
     width: 100px;
     color: white;
     font-family: "calibri";
-    border-radius: 3px;
+    border-radius: 4px;
     box-shadow: 1px 1px 3px 1px #000000;
-    padding: 3px;
+    padding: 5px;
     background-color: #0d82e3;
     cursor: pointer;
+    border: 0px;
+}
+.btn:hover{
+    background-color: #238aa6; 
 }
 
 .ajax_s
@@ -186,7 +190,7 @@ and open the template in the editor.
     font-family: "calibri";
     color: #585858;
     font-size: 14px;
-    
+    display: inline-block;
     text-align: justify;
 }
 

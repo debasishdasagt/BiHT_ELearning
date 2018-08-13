@@ -6,6 +6,6 @@
  * and open the template in the editor.
  */
 
-$conn=  mysql_connect('localhost','root','root');
+$conn=  mysql_connect('localhost','root','devdas');
 $db= mysql_select_db('biht_elearning');
 ?>
