@@ -71,6 +71,7 @@ if($_SESSION['rolecode']==1)
 <li><a>Administration</a>
 <ul>
   <li><a href="pages/learningcenter.php" target="form_frame">Learning Center</a></li>
+  <li><a href="pages/staffs.php" target="form_frame">Staffs</a></li>
   
  </ul></li>
 <?php } ?>
