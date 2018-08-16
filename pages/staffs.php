@@ -198,7 +198,7 @@ and open the template in the editor.
             
              <?php
         
-        if(isset($_GET['editlcid']) && $_GET['editlcid']!="")
+        if(isset($_GET['editstaffid']) && $_GET['editstaffid']!="")
         {
             $lcinfoq=  mysql_query("select lc_id,lc_name,lc_address,lc_pin_code,lc_mobile_number,lc_email,lc_start_date from d_learning_center where lc_id='".$_GET['editlcid']."'",$conn);
             $lcinfor=  mysql_fetch_array($lcinfoq);
@@ -249,31 +249,40 @@ and open the template in the editor.
         </div>
         <br>
         <div class="bodytext">
-        <table border="0" cellspacing="1" cellpadding="3">
+                <table border="0" cellspacing="1" cellpadding="3">
             <tr style="color: white; background-color: #1b7b95; border-radius: 2px; text-align: center">
-                <th>LC Code</th>
-                <th>LC Name</th>
+                <th>Staff Code</th>
+                <th>Staff Name</th>
                 <th>Contact Number</th>
                 <th>Email Address</th>
+                <th>Login ID</th>
+                <th>Under LC</th>
                 <th>Edit</th>
                 <th>Block</th>
             </tr>
             <?php 
-            $lclistq=  mysql_query("select lc_id,lc_name,lc_mobile_number,lc_email,record_status from d_learning_center",$conn);
+            $lclistq=  mysql_query("select d_staffs.staff_id,"
+                    . "d_staffs.staff_name,d_staffs.staff_mobile,"
+                    . "d_staffs.staff_email,"
+                    . "(select d_user_password.user_id from d_user_password where d_user_password.staff_id=d_staffs.staff_id and record_status='A') as uid,"
+                    . "(select d_learning_center.lc_name from d_learning_center where d_learning_center.lc_id=d_staffs.staff_under_lc) as lc,"
+                    . "d_staffs.record_status from d_staffs",$conn);
             while ($lclistr=mysql_fetch_array($lclistq))
             {
             ?>
             <tr style="color: black; background-color: #bababa; border-radius: 2px; text-align: center">
-                <td><?php echo $lclistr['lc_id']?></td>
-                <td><?php echo $lclistr['lc_name']?></td>
-                <td><?php echo $lclistr['lc_mobile_number']?></td>
-                <td><?php echo $lclistr['lc_email']?></td>
-                <td><a href="learningcenter.php?editlcid=<?php echo $lclistr['lc_id']?>">Edit</a></td>
+                <td><?php echo $lclistr['staff_id']?></td>
+                <td><?php echo $lclistr['staff_name']?></td>
+                <td><?php echo $lclistr['staff_mobile']?></td>
+                <td><?php echo $lclistr['staff_email']?></td>
+                <td><?php echo $lclistr['uid']?></td>
+                <td><?php echo $lclistr['lc']?></td>
+                <td><a href="staffs.php?editlcid=<?php echo $lclistr['staff_id']?>">Edit</a></td>
                 <td><?php 
                 if($lclistr['record_status']=='A')
-                {echo "<a href='learningcenter.php?lcstatus=B&statuslcid=".$lclistr['lc_id']."'>Block</a>";}
+                {echo "<a href='staffs.php?lcstatus=B&statuslcid=".$lclistr['staff_id']."'>Block</a>";}
                 else if($lclistr['record_status']=='B')
-                {echo "<a href='learningcenter.php?lcstatus=A&statuslcid=".$lclistr['lc_id']."'>Activate</a>";}
+                {echo "<a href='staffs.php?lcstatus=A&statuslcid=".$lclistr['staff_id']."'>Activate</a>";}
                         
                         ?></td>
             </tr>
