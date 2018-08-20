@@ -100,16 +100,46 @@ and open the template in the editor.
             function mdfy()
             {
                 include '../config.php';
-                $lcupdateq=  mysql_query("update d_learning_center set lc_name='".$_POST['lcname']."',lc_address='".$_POST['lcaddress']."',lc_pin_code='".$_POST['lcpincode']."',lc_mobile_number='".$_POST['lcphone']."',lc_email='".$_POST['lcemail']."',lc_start_date='".$_POST['lcstart']."' where lc_id='".$_POST['lccd']."'", $conn);
                 
-                if($lcupdateq)
+               
+                
+                $staffupdateq=  mysql_query("update d_staffs"
+                        . " set staff_name='".$_POST['staffname']."',"
+                        . "staff_address='".$_POST['staffaddress']."',"
+                        . "staff_dob='".$_POST['staffdob']."',"
+                        . "staff_mobile='".$_POST['staffphone']."',"
+                        . "staff_email='".$_POST['staffemail']."',"
+                        . "staff_under_lc='".$_POST['underlc']."',updated_on=now() where staff_id='".$_POST['staffid']."'", $conn);
+                
+                
+                
+                
+                
+                $staffroleupdateq=mysql_query("update d_user_roles set role_code='".$_POST['staffrole']."',updated_on=now()"
+                        . " where staff_id='".$_POST['staffid']."' and record_status='A'",$conn);
+               
+                if($staffupdateq && $staffroleupdateq)
                 {
-                    echo "<script>alert('Learning Center Updated Successfully')</script>";
-                }
-                else
+                if($_POST['staffpassword']==$_POST['staffpassword1'] && $_POST['staffpassword1']!="")
                 {
-                    echo "<script>alert('Something Went wrong while updating the Learning Center')</script>";
+                    $staffpasswdupdateq=  mysql_query("update d_user_password set passwd=md5('".$_POST['staffpassword']."') "
+                            . "where record_status='A' and staff_id='".$_POST['staffid']."'",$conn);
+                    if($staffpasswdupdateq)
+                    {echo "<script>alert('Staff Record and login password Updated Successfully')</script>";}
+                     else {
+                         echo "<script>alert('Something Went wrong while updating login password')</script>";
+                     }
                 }
+                
+                else {
+                         echo "<script>alert('Staff record updated without but without Password')</script>";
+                     }
+                }
+                else 
+                {
+                    echo "<script>alert('Something Went Wrong')</script>";
+                }
+               
             }
         
         ?>
@@ -200,44 +230,56 @@ and open the template in the editor.
         
         if(isset($_GET['editstaffid']) && $_GET['editstaffid']!="")
         {
-            $lcinfoq=  mysql_query("select lc_id,lc_name,lc_address,lc_pin_code,lc_mobile_number,lc_email,lc_start_date from d_learning_center where lc_id='".$_GET['editlcid']."'",$conn);
-            $lcinfor=  mysql_fetch_array($lcinfoq);
+            $staffinfoq=  mysql_query("select d_staffs.staff_id,"
+                    . "d_staffs.staff_name,d_staffs.staff_mobile,"
+                    . "d_staffs.staff_email,d_staffs.staff_dob,"
+                    . "d_staffs.staff_under_lc,d_staffs.staff_address,"
+                    . "(select role_code from d_user_roles where d_user_roles.staff_id=d_staffs.staff_id and record_status='A') as role_cd,"
+                    . "(select d_user_password.user_id from d_user_password where d_user_password.staff_id=d_staffs.staff_id and record_status='A') as uid,"
+                    . "d_staffs.record_status from d_staffs where d_staffs.staff_id='".$_GET['editstaffid']."'",$conn);
+            $staffinfor=  mysql_fetch_array($staffinfoq);
          ?>
         <script type="text/javascript">
             document.getElementById('submitbtn').value="Modify";
             document.getElementById('submittyp').value="modify";
-            document.getElementById('lccd').value='<?php echo $lcinfor['lc_id'] ?>';
-            document.getElementById('lccd').disabled=false;
-            document.getElementById('lcname').value='<?php echo $lcinfor['lc_name'] ?>';
-            document.getElementById('lcaddress').value='<?php echo $lcinfor['lc_address'] ?>';
-            document.getElementById('lcpincode').value='<?php echo $lcinfor['lc_pin_code'] ?>';
-            document.getElementById('lcphone').value='<?php echo $lcinfor['lc_mobile_number'] ?>';
-            document.getElementById('lcstart').value='<?php echo $lcinfor['lc_start_date'] ?>';
-            document.getElementById('lcmail').value='<?php echo $lcinfor['lc_email'] ?>';
-            
-         </script>
+            document.getElementById('staffid').value='<?php echo $staffinfor['staff_id'] ?>';
+            document.getElementById('staffid').disabled=false;
+            document.getElementById('staffname').value='<?php echo $staffinfor['staff_name'] ?>';
+            document.getElementById('staffaddress').value='<?php echo $staffinfor['staff_address'] ?>';
+            document.getElementById('staffdob').value='<?php echo $staffinfor['staff_dob'] ?>';
+            document.getElementById('staffphone').value='<?php echo $staffinfor['staff_mobile'] ?>';
+            document.getElementById('staffemail').value='<?php echo $staffinfor['staff_email'] ?>';
+            document.getElementById('underlc').value='<?php echo $staffinfor['staff_under_lc'] ?>';
+            document.getElementById('staffuserid').value='<?php echo $staffinfor['uid'] ?>';
+            document.getElementById('staffuserid').readonly=true;
+            document.getElementById('staffpassword').placeholder='Unchanged';
+            document.getElementById('staffpassword1').placeholder='Unchanged';
+            document.getElementById('staffrole').value='<?php echo $staffinfor['role_cd'] ?>';
+        </script>
         <?php
         }
        
-        if(isset($_GET['statuslcid']))
+        if(isset($_GET['staffid']))
         {
-            if($_GET['lcstatus']=='B')
+            if($_GET['staffstatus']=='B')
             {
                 
-                $lcstatusq=  mysql_query("update d_learning_center set record_status='B' where lc_id='".$_GET['statuslcid']."'",$conn);
-                if($lcstatusq)
+                $lcstatusq=  mysql_query("update d_staffs set record_status='B' where staff_id='".$_GET['staffid']."'",$conn);
+                $staffpasswdstatus=mysql_query("update d_user_password set record_status='D' where staff_id='".$_GET['staffid']."' and record_status='A'",$conn);
+                if($lcstatusq && $staffpasswdstatus)
                 {
-                    echo "<script>alert('Learning Center Blocked Successfully')</script>";
+                    echo "<script>alert('Staff Blocked Successfully')</script>";
                 }
             }
             
             
-            else if($_GET['lcstatus']=='A')
+            else if($_GET['staffstatus']=='A')
             {
-                $lcstatusq=  mysql_query("update d_learning_center set record_status='A' where lc_id='".$_GET['statuslcid']."'",$conn);
-                if($lcstatusq)
+                $lcstatusq=  mysql_query("update d_staffs set record_status='A' where staff_id='".$_GET['staffid']."'",$conn);
+                $staffpasswdstatus=mysql_query("update d_user_password set record_status='A' where staff_id='".$_GET['staffid']."' and record_status='D'",$conn);
+                if($lcstatusq && $staffpasswdstatus)
                 {
-                    echo "<script>alert('Learning Center Activated Successfully')</script>";
+                    echo "<script>alert('Staff Activated Successfully')</script>";
                 }
             }
         }
@@ -277,12 +319,12 @@ and open the template in the editor.
                 <td><?php echo $lclistr['staff_email']?></td>
                 <td><?php echo $lclistr['uid']?></td>
                 <td><?php echo $lclistr['lc']?></td>
-                <td><a href="staffs.php?editlcid=<?php echo $lclistr['staff_id']?>">Edit</a></td>
+                <td><a href="staffs.php?editstaffid=<?php echo $lclistr['staff_id']?>">Edit</a></td>
                 <td><?php 
                 if($lclistr['record_status']=='A')
-                {echo "<a href='staffs.php?lcstatus=B&statuslcid=".$lclistr['staff_id']."'>Block</a>";}
+                {echo "<a href='staffs.php?staffstatus=B&staffid=".$lclistr['staff_id']."'>Block</a>";}
                 else if($lclistr['record_status']=='B')
-                {echo "<a href='staffs.php?lcstatus=A&statuslcid=".$lclistr['staff_id']."'>Activate</a>";}
+                {echo "<a href='staffs.php?staffstatus=A&staffid=".$lclistr['staff_id']."'>Activate</a>";}
                         
                         ?></td>
             </tr>

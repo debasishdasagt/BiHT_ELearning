@@ -72,7 +72,7 @@ if($_SESSION['rolecode']==1)
 <ul>
   <li><a href="pages/learningcenter.php" target="form_frame">Learning Center</a></li>
   <li><a href="pages/staffs.php" target="form_frame">Staffs</a></li>
-  
+  <li><a href="pages/courses.php" target="form_frame">Courses</a></li>
  </ul></li>
 <?php } ?>
 
