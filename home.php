@@ -75,7 +75,10 @@ if($_SESSION['rolecode']==1)
   <li><a href="pages/courses.php" target="form_frame">Courses</a></li>
  </ul></li>
 <?php } ?>
-
+<li><a>Students</a>
+<ul>
+    <li><a href="pages/students/newstudent.php" target="form_frame">New Student</a></li>
+ </ul></li>
 <li><a>
     <?php echo $Ruserid['staff_name']; ?>
     
