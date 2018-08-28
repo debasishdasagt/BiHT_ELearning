@@ -8,6 +8,7 @@
  $savestudentq=  mysql_query("INSERT INTO `d_students`
 (`reg_num`,
 `reg_date`,
+`student_under_lc`,
 `course_code`,
 `course_duration`,
 `duration_unit`,
@@ -31,11 +32,13 @@
 `rc_type`,
 `medium`,
 `remarks`,
-`created_on`)
+`created_on`,
+`created_by`)
 VALUES
 ('"
 .$getregnumr['sid']."','"
 .$_POST['regdt']."','"
+.$_POST['slc']."','"
 .$_POST['coursecd']."','"
 .$_POST['course_duration']."','"
 .$_POST['duration_unit']."','"
@@ -58,7 +61,7 @@ VALUES
 .$_POST['gender']."','"
 .$_POST['rc_type']."','"
 .$_POST['medium']."','"
-.$_POST['remarks']."',now())",$conn);
+.$_POST['remarks']."',now(),'".$_POST['userid']."')",$conn);
  
  if($savestudentq)
  {

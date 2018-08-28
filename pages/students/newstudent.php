@@ -4,6 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<?php
+include '../../config.php';
+        include_once 'loginChecker.php';
+        ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -51,6 +56,7 @@ and open the template in the editor.
                 $.post('savestudent.php',
                 {
                     regdt: document.getElementById('sregdt').value,
+                    slc: document.getElementById('slc').value,
                     coursecd: document.getElementById('sccd').value,
                     course_duration: document.getElementById('scduration').value,
                     duration_unit: document.getElementById('scdurationunit').value,
@@ -73,14 +79,16 @@ and open the template in the editor.
                     category: document.getElementById('scate').value,
                     gender: document.getElementById('sgender').value,
                     rc_type: document.getElementById('srctype').value,
+                    userid: document.getElementById('userid').value,
                     medium: document.getElementById('smed').value
                     }, function(data,status){
                         
                         var d=data.split('^');
                         if(d[0]=='1')
                         {
-                            alert('Student Saved with Registration Number: '+d[1]);
-                            document.location="newstudent.php";
+                            document.getElementById('regnum').value=d[1];
+                            alert('Student Saved with Registration Number: '+d[1]+"\n\n Now uploading Student Picture");
+                            document.getElementById('picuploader').submit();
                         }
                         else
                         {
@@ -92,6 +100,21 @@ and open the template in the editor.
     );
             }
             
+            
+            function readURL(input){
+                var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+               if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+               {var reader = new FileReader();
+                   reader.onload = function (e) {
+                       $('#pic').attr('src', e.target.result);
+                   }
+
+                   reader.readAsDataURL(input.files[0]);
+               }else{
+                    $('#pic').attr('src', '../../images/student_icon.png');
+               }
+              }
+            
             </script>
         
    
@@ -101,8 +124,8 @@ and open the template in the editor.
          
     <body>
         <?php
-       
-        include '../../config.php';
+        
+        
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
             if($_POST['submittyp']=='new')
@@ -180,12 +203,18 @@ and open the template in the editor.
            {echo "New";} ?> </span><br>
     <center>
         <div class="bodytext" style="border:1px solid #dddddd;border-radius:5px">
-            <form name="lc" action="courses.php" method="post">
+            
             <table cellspacin="0" cellpadding="5" border="0">
                 <tr>
                     <td>Registration No.</td>
                     <td><input type="text" class="txtbx" name="sregno" id="sregno" disabled="yes"></td>
-                    <td colspan="3" rowspan="4" align="center">
+                    <td colspan="3" rowspan="5" align="center">
+                        
+                        <form action="picuploader.php" id="picuploader" method="POST" enctype ="multipart/form-data" >
+                            <img src="../../images/student_icon.png" width="100" height="120" id="pic" style="border: 5px solid #ffffff; box-shadow:1px 1px 2px #000000">
+                            <br><br><input type="hidden" name="MAX_FILE_SIZE" value="3000000" /><input type="file" id="picc" name="picc" onchange="readURL(this)">
+                            <input type="hidden" id="regnum" name="regnum">
+                        </form>
                         
                         
                         
@@ -198,11 +227,36 @@ and open the template in the editor.
                     
                 </tr>
                 <tr>
+                    <td>Learning Center</td>
+                    <td>
+                        <select id="slc" class="txtbx" style="height:25px">
+                            <?php
+                            $slcq=  mysql_query("select lc_id,lc_name from d_learning_center where record_status='A' and lc_id='".$_SESSION['lccd']."'",$conn);
+                            while($slcr=  mysql_fetch_array($slcq))
+                            {
+                                echo "<option value=".$slcr['lc_id'].">".$slcr['lc_name']."</option>";
+                            }
+                            
+                            
+                            ?>
+                            
+                            
+                            
+                        </select>
+                        
+                        
+                        
+                    </td>
+                    
+                </tr>
+                <tr>
                     <td>Course Code</td>
                     <td>
                         
                         <select name='sccd' id='sccd' class='txtbx' style="height: 25px;"  onchange="javascript:getcourse()" selectedIndex="-1">
                         <?php
+                        
+        
                         $courseq=  mysql_query("select course_code from d_courses where record_status='A'",$conn);
                         while ($courser=mysql_fetch_array($courseq))
                         {
@@ -372,12 +426,13 @@ and open the template in the editor.
                     <td colspan="4" align="center">
                         <input type="hidden" name='idd' id='idd' value='<?php echo $_GET['editcid'] ?>'>
                         <input type="hidden" name="submittyp" id="submittyp" value="new">
+                        <input type="hidden" id="userid" value="<?php echo $_SESSION['userid'];?>">
                         <div id="ssubmitbtn" class="btn" onclick="javascript:savestudent()"> Submit </div>
                         
                     </td>
                     
                 </tr>
-            </table></form>
+            </table>
             
             
             
@@ -409,7 +464,11 @@ $('#sdob').datetimepicker({
     timepicker: false,
     closeOnDateSelect: true,
     });
-
+<?php if(isset($_GET['info']))
+{
+    echo "alert('".$_GET['info']."')";
+}
+?>
 </script>    
    
 </html>
