@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+/* Let me test this */
 $conn=  mysql_connect('localhost','root','devdas');
 $db= mysql_select_db('biht_elearning');
 ?>
