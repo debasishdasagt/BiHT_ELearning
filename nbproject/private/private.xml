@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/pages/students/newstudent.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/index.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/pages/students/getcourse.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/pages/learningcenter.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/pages/students/picuploader.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/pages/students/savestudent.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/handlers/lclogin.php</file>
-            <file>file:/C:/xampp/htdocs/BIHT_ELearning/home.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -41,7 +41,7 @@ and open the template in the editor.
                 }
                 else
                 {
-                    $.post('studentsearchhandler.php',
+                    $.get('studentsearchhandler1.php',
                     {
                         sdata: ssdata,
                         stype: type
@@ -72,12 +72,12 @@ and open the template in the editor.
                         <input type="radio" name="susing" value="mob" id="mob">By Mobile Number</td></tr>
             </table>
         </form>
-        
-        
-        
-        
         </div>
+        <br><br>
+        
         <div id="result"></div>
+        
+        
     </center>
         <?php
         

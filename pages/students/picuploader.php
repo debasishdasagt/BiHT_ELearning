@@ -35,11 +35,11 @@ if($_FILES['picc']['tmp_name'])
             $r=  mysql_query($m_query,$conn);
             if($r)
             {
-               header("location:newstudent.php?info=Saved Successfully with Registration Number:".$_POST['regnum']);
+               header("location:../payments/admissionfee.php?info=Saved Successfully with Registration Number:".$_POST['regnum']."&regnum=".$_POST['regnum']);
             }
             else
             {
-                header("location:newstudent.php?info=Something went wrong while doing Database entry of picture for Registration Number:".$_POST['regnum']);
+                header("location:../payments/admissionfee.php?info=Something went wrong while doing Database entry of picture for Registration Number:".$_POST['regnum']);
             }
         }
         
@@ -51,7 +51,7 @@ if($_FILES['picc']['tmp_name'])
     }
 }
  else {
-    header("location:newstudent.php?info=No Picture was selected for Registration Number:".$_POST['regnum']);
+    header("location:../payments/admissionfee.php?info=No Picture was selected for Registration Number:".$_POST['regnum']."&regnum=".$_POST['regnum']);
 }
 
 ?>

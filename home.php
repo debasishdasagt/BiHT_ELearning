@@ -79,7 +79,26 @@ if($_SESSION['rolecode']==1)
 <ul>
     <li><a href="pages/students/newstudent.php" target="form_frame">New Student</a></li>
     <li><a href="pages/students/searchstudent.php" target="form_frame">Search Student</a></li>
+    <?php if($_SESSION['rolecode']==1)
+{
+?>
+    <li><a href="pages/export_student.php" target="form_frame">Export Student Data</a></li>
+<?php } ?>
  </ul></li>
+ 
+ <li><a>Payment</a>
+<ul>
+    <li><a href="pages/payments/admissionfee.php" target="form_frame">Admission Fee</a></li>
+    <li><a href="pages/payments/tuitionfee.php" target="form_frame">Tuition Fee</a></li>
+    <li><a href="pages/payments/paymenthistory.php" target="form_frame">Payment History</a></li>
+    <?php if($_SESSION['rolecode']==1)
+{
+?>
+    <li><a href="pages/export_payments.php" target="form_frame">Export Payment Data</a></li>
+<?php } ?>
+ </ul></li>
+ 
+ 
 <li><a>
     <?php echo $Ruserid['staff_name'];?>
     

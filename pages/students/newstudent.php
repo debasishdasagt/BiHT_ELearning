@@ -15,9 +15,11 @@ include '../../config.php';
         <title></title>
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../css/featherlight.css">
         
         <script type="text/javascript" src="../../js/jquery-latest.js"></script>
         <script type="text/javascript" src="../../js/jquery.datetimepicker.full.js"></script>
+        <script type="text/javascript" src="../../js/featherlight.js" charset="utf-8"></script>
         
         <script type="text/javascript">
             
@@ -101,6 +103,59 @@ include '../../config.php';
             }
             
             
+            function modifystudent()
+            {
+                document.getElementById('ssubmitbtn').innerHTML="<img src='../../images/loading2.gif' width=13 height=13> Modifying...";
+                $.post('modifystudent.php',
+                {
+                    id:<?php if(isset($_GET['id'])) {echo $_GET['id'];} else{echo "''";} ?>,
+                    regnum: document.getElementById('sregno').value,
+                    regdt: document.getElementById('sregdt').value,
+                    slc: document.getElementById('slc').value,
+                    coursecd: document.getElementById('sccd').value,
+                    course_duration: document.getElementById('scduration').value,
+                    duration_unit: document.getElementById('scdurationunit').value,
+                    admission_fee: document.getElementById('scafee').value,
+                    tuition_fee: document.getElementById('sctfee').value,
+                    total_fee: document.getElementById('sctotalfee').value,
+                    remarks: document.getElementById('sremarks').value,
+                    student_name: document.getElementById('sname').value,
+                    student_fname: document.getElementById('sfname').value,
+                    student_mname: document.getElementById('smname').value,
+                    student_sname: document.getElementById('ssname').value,
+                    present_address: document.getElementById('spreadd').value,
+                    permanent_address: document.getElementById('speradd').value,
+                    uidai_number: document.getElementById('suaid').value,
+                    dob: document.getElementById('sdob').value,
+                    mobile_number: document.getElementById('smob').value,
+                    email: document.getElementById('semail').value,
+                    academic_qualification: document.getElementById('saq').value,
+                    occupation: document.getElementById('soccu').value,
+                    category: document.getElementById('scate').value,
+                    gender: document.getElementById('sgender').value,
+                    rc_type: document.getElementById('srctype').value,
+                    userid: document.getElementById('userid').value,
+                    medium: document.getElementById('smed').value
+                    }, function(data,status){
+                        
+                        var d=data;
+                        if(d=='1')
+                        {
+                            
+                            alert('Student Record Modified Successfully');
+                            document.location="searchstudent.php";
+                        }
+                        else
+                        {
+                            document.getElementById('ssubmitbtn').innerHTML="Modify";
+                            alert('Something Went Wrong while Modifying Student Data');
+                        }
+                    }
+    
+    );
+            }
+            
+            
             function readURL(input){
                 var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
                if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
@@ -114,7 +169,10 @@ include '../../config.php';
                     $('#pic').attr('src', '../../images/student_icon.png');
                }
               }
-            
+              
+              
+              
+              
             </script>
         
    
@@ -123,81 +181,10 @@ include '../../config.php';
     </head>
          
     <body>
-        <?php
-        
-        
-        if($_SERVER['REQUEST_METHOD']=="POST")
-        {
-            if($_POST['submittyp']=='new')
-            {
-                submt();
-            }
-            else if($_POST['submittyp']=='modify')
-            {
-                mdfy();
-            }
-           
-        }
         
         
         
-        
-        
-        
-        function submt()
-            {
-            include '../config.php';
-                if(isset($_POST['ccd']) && $_POST['ccd']!="")
-                {
-                    
-                        $newcq=  mysql_query("insert into d_courses(course_code,course_name,"
-                                . "course_content,course_duration,"
-                                . "duration_unit,admission_fee,"
-                                . "tuition_fee,total_fee,created_on,record_status) values("
-                                . "'".$_POST['ccd']."','".$_POST['cname']."',"
-                                . "'".$_POST['ccontent']."','".$_POST['cduration']."',"
-                                . "'".$_POST['cdurationunit']."','".$_POST['afee']."',"
-                                . "'".$_POST['tfee']."','".$_POST['totalfee']."',now(),'A')",$conn);
-                        
-                        if($newcq)
-                        {
-                            echo "<script>alert('Course Saved Successfully')</script>";
-                        }
-                        else
-                        {
-                            echo "<script>alert('Something Went Wrong while Saving Course')</script>";
-                        }
-                    
-                }
-                else
-                {
-                    echo "<script>alert('Please Enter Course Code')</script>";
-                }
-            }
-        
-            function mdfy()
-            {
-                include '../config.php';
-                $cupdateq=  mysql_query("update d_courses set "
-                        . "course_code='".$_POST['ccd']."',course_name='".$_POST['cname']."',"
-                        . "course_content='".$_POST['ccontent']."', course_duration='".$_POST['cduration']."',"
-                        . "duration_unit='".$_POST['cdurationunit']."',admission_fee='".$_POST['afee']."',"
-                        . "tuition_fee='".$_POST['tfee']."',total_fee='".$_POST['totalfee']."',updated_on=now() where id='".$_POST['idd']."'" , $conn);
-                
-                if($cupdateq)
-                {
-                    echo "<script>alert('Course Updated Successfully')</script>";
-                }
-                else
-                {
-                    echo "<script>alert('Something Went wrong while updating the Course')</script>";
-                }
-            }
-        
-        ?>
-        
-        
-        <span style="font-family: 'calibri'; color:#bdbdbd; font-size: 50px">Students : <?php if(isset($_POST['submittyp']))
+        <span style="font-family: 'calibri'; color:#bdbdbd; font-size: 50px">Students : <?php if(isset($_GET['submittyp']))
         {echo "Edit / Update";}
         else
            {echo "New";} ?> </span><br>
@@ -251,10 +238,16 @@ include '../../config.php';
                 </tr>
                 <tr>
                     <td>Course Code</td>
-                    <td>
+                    <td><?php 
+        if(isset($_GET['submittyp'])&&$_GET['submittyp']=="modify")
+        {
+        ?>
+                        <input type="text" name="sccd" id="sccd" class="txtbx">
+        <?php } else { ?>
                         
                         <select name='sccd' id='sccd' class='txtbx' style="height: 25px;"  onchange="javascript:getcourse()" selectedIndex="-1">
-                        <?php
+                            <option value="">---Select---</option>
+                            <?php
                         
         
                         $courseq=  mysql_query("select course_code from d_courses where record_status='A'",$conn);
@@ -267,7 +260,7 @@ include '../../config.php';
                         
                         <br>
                         <div style="font-size: xx-small" id="cdtxt"></div>
-                        
+        <?php } ?>
                     </td>
                     
                 </tr>
@@ -326,13 +319,13 @@ include '../../config.php';
                  <tr><td colspan="4"><div class="deviderline"></div></td></tr>
                 <tr>
                     <td>Aadhar Number</td>
-                    <td><input type="text" class="txtbx" name="suaid" id="suaid"></td>
+                    <td><input type="text" class="txtbx" name="suaid" id="suaid" style="width:175px"><a onclick="this.href='studentsearchhandler.php?sdata='+document.getElementById('suaid').value+'&stype=uid'" href="" data-featherlight="ajax"><img src="../../images/find.png" style="margin-bottom: -7px;" border="0"></a></td>
                     <td>Date of Birth</td>
                     <td><input type="text" class="txtbx" name="sdob" id="sdob"></td>
                 </tr>
                 <tr>
                     <td>Mobile Number</td>
-                    <td><input type="text" class="txtbx" name="smob" id="smob"></td>
+                    <td><input type="text" class="txtbx" name="smob" id="smob" style="width:175px"><a onclick="this.href='studentsearchhandler.php?sdata='+document.getElementById('smob').value+'&stype=mob'" href="" data-featherlight="ajax"><img src="../../images/find.png" style="margin-bottom: -7px;" border="0"></a></td>
                     <td>Email ID</td>
                     <td><input type="text" class="txtbx" name="semail" id="semail"></td>
                 </tr>
@@ -427,7 +420,14 @@ include '../../config.php';
                         <input type="hidden" name='idd' id='idd' value='<?php echo $_GET['editcid'] ?>'>
                         <input type="hidden" name="submittyp" id="submittyp" value="new">
                         <input type="hidden" id="userid" value="<?php echo $_SESSION['userid'];?>">
+                         <?php 
+        if(isset($_GET['submittyp']) && $_GET['submittyp']=="modify")
+        {
+        ?>
+                        <div id="ssubmitbtn" class="btn" onclick="javascript:modifystudent()"> Modify </div>
+        <?php } else{?>
                         <div id="ssubmitbtn" class="btn" onclick="javascript:savestudent()"> Submit </div>
+                        <?php }?>
                         
                     </td>
                     
@@ -445,7 +445,57 @@ include '../../config.php';
         
     </center>
     </body>
+    <?php
+    if(isset($_GET['id'])&&$_GET['submittyp'])
+    {
+        $sq=  mysql_query("select `id`,`reg_num`,`reg_date`,"
+                . "ifnull(`student_under_lc`,'') as lc,`course_code`,"
+                . "`course_duration`,`duration_unit`,`admission_fee`,"
+                . "`tuition_fee`,`total_fee`,`student_name`,"
+                . "`student_father_name`,`student_mother_name`,"
+                . "`student_spouse_name`,`present_address`,"
+                . "`permanent_address`,`uidai_number`,`student_dob`,"
+                . "`mobile_number`,`email_id`,`academic_qualification`,"
+                . "`occupation`,`category`,`gender`,`rc_type`,`medium`,"
+                . "`remarks`,ifnull(`student_pic`,'student_icon.png') as pic from d_students where id='".$_GET['id']."'",$conn);
+        
+        $sr=  mysql_fetch_array($sq);
+        ?>
+    <script type="text/javascript">
+        <?php 
+        if($_GET['submittyp']=="modify")
+        {
+        ?>
+        document.getElementById('sregno').value='<?php echo $sr['reg_num'];?>';
+        document.getElementById('sregdt').value='<?php echo $sr['reg_date'];?>';document.getElementById('slc').value='<?php echo $sr['lc'];?>';
+        document.getElementById('sccd').value='<?php echo $sr['course_code'];?>';document.getElementById('scduration').value='<?php echo $sr['course_duration'];?>';
+        document.getElementById('scdurationunit').value='<?php echo $sr['duration_unit'];?>';document.getElementById('sctfee').value='<?php echo $sr['tuition_fee'];?>';
+        document.getElementById('scafee').value='<?php echo $sr['admission_fee'];?>';document.getElementById('sctotalfee').value='<?php echo $sr['total_fee'];?>';
+        
+        /* Disabling  Fields */
+        document.getElementById('sregno').disabled=false;document.getElementById('sregno').readOnly=true;
+        document.getElementById('sregdt').readOnly=false;document.getElementById('slc').readOnly=true;
+        document.getElementById('sccd').readOnly=true;document.getElementById('scduration').readOnly=true;
+        document.getElementById('scdurationunit').readOnly=true;document.getElementById('sctfee').readOnly=true;
+        document.getElementById('scafee').readOnly=true;document.getElementById('sctotalfee').readOnly=true;
+        <?php } ?>
+        document.getElementById('sname').value='<?php echo $sr['student_name'];?>';document.getElementById('sfname').value='<?php echo $sr['student_father_name'];?>';
+        document.getElementById('smname').value='<?php echo $sr['student_mother_name'];?>';document.getElementById('ssname').value='<?php echo $sr['student_spouse_name'];?>';
+        document.getElementById('spreadd').value='<?php echo $sr['present_address'];?>';document.getElementById('speradd').value='<?php echo $sr['permanent_address'];?>';
+        document.getElementById('suaid').value='<?php echo $sr['uidai_number'];?>';document.getElementById('sdob').value='<?php echo $sr['student_dob'];?>';
+        document.getElementById('smob').value='<?php echo $sr['mobile_number'];?>';document.getElementById('semail').value='<?php echo $sr['email_id'];?>';
+        document.getElementById('saq').value='<?php echo $sr['academic_qualification'];?>';document.getElementById('soccu').value='<?php echo $sr['occupation'];?>';
+        document.getElementById('scate').value='<?php echo $sr['category'];?>';document.getElementById('sgender').value='<?php echo $sr['gender'];?>';
+        document.getElementById('srctype').value='<?php echo $sr['rc_type'];?>';document.getElementById('smed').value='<?php echo $sr['medium'];?>';
+        document.getElementById('sremarks').value=document.getElementById('sremarks').value+'Old Registration:<?php echo $sr['reg_num'];?>';
+        $('#pic').attr('src', 'pics/<?php echo $sr['pic'];?>');
+    </script>
     
+    
+    
+    <?php
+    }   
+    ?>
     
 <script type="text/javascript">
     $('#sregdt').datetimepicker({
